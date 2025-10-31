@@ -7,17 +7,17 @@
   "types": "./dist/index.d.ts",
   "exports": {
     ".": {
+      "types": "./dist/index.d.ts",
       "import": "./dist/index.mjs",
-      "require": "./dist/index.js",
-      "types": "./dist/index.d.ts"
+      "require": "./dist/index.js"
     }
   },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build": "tsup src/index.ts --format cjs,esm --dts",
-    "dev": "tsup src/index.ts --format cjs,esm --dts --watch",
+    "build": "tsup src/index.tsx --format cjs,esm --dts",
+    "dev": "tsup src/index.tsx --format cjs,esm --dts --watch",
     "prepublishOnly": "npm run build"
   },
   "keywords": [
@@ -27,10 +27,21 @@
     "compose",
     "flatten",
     "wrapper",
-    "hoc"
+    "hoc",
+    "provider-composition",
+    "jsx",
+    "typescript"
   ],
   "author": "",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/demansou/react-providers-flattener.git"
+  },
+  "bugs": {
+    "url": "https://github.com/demansou/react-providers-flattener/issues"
+  },
+  "homepage": "https://github.com/demansou/react-providers-flattener#readme",
   "peerDependencies": {
     "react": ">=16.8.0"
   },
