@@ -1,0 +1,37 @@
+# Source files
+src/
+tsconfig.json
+
+# Development
+.github/
+.vscode/
+.idea/
+
+# Testing
+*.test.ts
+*.test.tsx
+*.spec.ts
+*.spec.tsx
+coverage/
+.nyc_output/
+
+# Environment
+.env
+.env.*
+
+# Editor
+*.sw?
+.DS_Store
+
+# Git
+.git/
+.gitignore
+
+# CI
+.travis.yml
+.gitlab-ci.yml
+.circleci/
+
+# Misc
+*.log
+node_modules/
