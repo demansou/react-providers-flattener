@@ -2,15 +2,21 @@ import React from 'react';
 import { ProviderComposer } from 'react-providers-flattener';
 
 // Example provider components
-const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return <div data-theme="dark">{children}</div>;
 };
 
-const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return <div data-auth="authenticated">{children}</div>;
 };
 
-const RouterProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const RouterProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return <div data-router="enabled">{children}</div>;
 };
 
@@ -31,9 +37,7 @@ const App: React.FC = () => {
 // Use this clean approach:
 export default function Root() {
   return (
-    <ProviderComposer
-      providers={[ThemeProvider, AuthProvider, RouterProvider]}
-    >
+    <ProviderComposer providers={[ThemeProvider, AuthProvider, RouterProvider]}>
       <App />
     </ProviderComposer>
   );

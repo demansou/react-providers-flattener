@@ -2,19 +2,27 @@ import React from 'react';
 import { composeProviders } from 'react-providers-flattener';
 
 // Example providers
-const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return <div data-theme="dark">{children}</div>;
 };
 
-const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return <div data-auth="authenticated">{children}</div>;
 };
 
-const RouterProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const RouterProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return <div data-router="enabled">{children}</div>;
 };
 
-const QueryProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const QueryProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return <div data-query="enabled">{children}</div>;
 };
 

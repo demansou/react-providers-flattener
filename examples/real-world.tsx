@@ -20,24 +20,43 @@ import { ProviderComposer } from 'react-providers-flattener';
 // import CssBaseline from '@mui/material/CssBaseline';
 
 // Mock implementations for demonstration purposes
-const QueryClientProvider: React.FC<any> = ({ children }) => children;
-const RouterProvider: React.FC<any> = ({ children }) => children;
-const ThemeProvider: React.FC<any> = ({ children }) => children;
+const QueryClientProvider: React.FC<{
+  children: React.ReactNode;
+  client?: unknown;
+}> = ({ children }) => <>{children}</>;
+const RouterProvider: React.FC<{
+  children: React.ReactNode;
+  router?: unknown;
+}> = ({ children }) => <>{children}</>;
+const ThemeProvider: React.FC<{
+  children: React.ReactNode;
+  theme?: unknown;
+}> = ({ children }) => <>{children}</>;
 const CssBaseline: React.FC = () => null;
 
 // Your custom providers
-const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return <div>{children}</div>;
 };
 
-const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return <div>{children}</div>;
 };
 
 // Configuration
-const queryClient = { /* QueryClient instance */ };
-const router = { /* router configuration */ };
-const theme = { /* theme configuration */ };
+const queryClient = {
+  /* QueryClient instance */
+};
+const router = {
+  /* router configuration */
+};
+const theme = {
+  /* theme configuration */
+};
 
 const App: React.FC = () => {
   return (

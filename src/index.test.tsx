@@ -8,24 +8,22 @@ const UserContext = createContext<string | null>(null);
 const LanguageContext = createContext<string>('en');
 
 // Mock providers
-const ThemeProvider: React.FC<{ theme?: string; children: React.ReactNode }> = ({
-  theme = 'dark',
-  children
-}) => (
+const ThemeProvider: React.FC<{
+  theme?: string;
+  children: React.ReactNode;
+}> = ({ theme = 'dark', children }) => (
   <ThemeContext.Provider value={theme}>{children}</ThemeContext.Provider>
 );
 
 const UserProvider: React.FC<{ user?: string; children: React.ReactNode }> = ({
   user = 'John',
-  children
-}) => (
-  <UserContext.Provider value={user}>{children}</UserContext.Provider>
-);
+  children,
+}) => <UserContext.Provider value={user}>{children}</UserContext.Provider>;
 
-const LanguageProvider: React.FC<{ lang?: string; children: React.ReactNode }> = ({
-  lang = 'fr',
-  children
-}) => (
+const LanguageProvider: React.FC<{
+  lang?: string;
+  children: React.ReactNode;
+}> = ({ lang = 'fr', children }) => (
   <LanguageContext.Provider value={lang}>{children}</LanguageContext.Provider>
 );
 
@@ -77,7 +75,9 @@ describe('ProviderComposer', () => {
 
   it('should compose multiple providers without props', () => {
     render(
-      <ProviderComposer providers={[ThemeProvider, UserProvider, LanguageProvider]}>
+      <ProviderComposer
+        providers={[ThemeProvider, UserProvider, LanguageProvider]}
+      >
         <TestConsumer />
       </ProviderComposer>
     );
@@ -93,7 +93,7 @@ describe('ProviderComposer', () => {
         providers={[
           [ThemeProvider, { theme: 'custom-dark' }],
           [UserProvider, { user: 'Jane' }],
-          [LanguageProvider, { lang: 'es' }]
+          [LanguageProvider, { lang: 'es' }],
         ]}
       >
         <TestConsumer />
@@ -111,7 +111,7 @@ describe('ProviderComposer', () => {
         providers={[
           [ThemeProvider, { theme: 'mixed' }],
           UserProvider,
-          [LanguageProvider, { lang: 'de' }]
+          [LanguageProvider, { lang: 'de' }],
         ]}
       >
         <TestConsumer />
@@ -126,7 +126,9 @@ describe('ProviderComposer', () => {
   it('should maintain correct provider order (outer to inner)', () => {
     // Create a provider that depends on another context
     const DependentContext = createContext<string>('');
-    const DependentProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+    const DependentProvider: React.FC<{ children: React.ReactNode }> = ({
+      children,
+    }) => {
       const theme = useContext(ThemeContext);
       return (
         <DependentContext.Provider value={`themed-${theme}`}>
@@ -147,7 +149,9 @@ describe('ProviderComposer', () => {
     );
 
     // DependentProvider should be able to access ThemeContext value
-    expect(screen.getByTestId('dependent')).toHaveTextContent('Dependent: themed-dark');
+    expect(screen.getByTestId('dependent')).toHaveTextContent(
+      'Dependent: themed-dark'
+    );
   });
 
   it('should handle empty providers array', () => {
@@ -178,7 +182,7 @@ describe('composeProviders', () => {
   it('should create a composed provider with props', () => {
     const ComposedProviders = composeProviders([
       [ThemeProvider, { theme: 'composed' }],
-      [UserProvider, { user: 'Bob' }]
+      [UserProvider, { user: 'Bob' }],
     ]);
 
     render(
@@ -195,7 +199,7 @@ describe('composeProviders', () => {
     const AppProviders = composeProviders([
       [ThemeProvider, { theme: 'app' }],
       [UserProvider, { user: 'AppUser' }],
-      [LanguageProvider, { lang: 'app-lang' }]
+      [LanguageProvider, { lang: 'app-lang' }],
     ]);
 
     // Use it multiple times
@@ -207,7 +211,9 @@ describe('composeProviders', () => {
 
     expect(screen.getByTestId('theme')).toHaveTextContent('Theme: app');
     expect(screen.getByTestId('user')).toHaveTextContent('User: AppUser');
-    expect(screen.getByTestId('language')).toHaveTextContent('Language: app-lang');
+    expect(screen.getByTestId('language')).toHaveTextContent(
+      'Language: app-lang'
+    );
 
     unmount();
 
@@ -220,7 +226,9 @@ describe('composeProviders', () => {
 
     expect(screen.getByTestId('theme')).toHaveTextContent('Theme: app');
     expect(screen.getByTestId('user')).toHaveTextContent('User: AppUser');
-    expect(screen.getByTestId('language')).toHaveTextContent('Language: app-lang');
+    expect(screen.getByTestId('language')).toHaveTextContent(
+      'Language: app-lang'
+    );
   });
 
   it('should handle empty providers array', () => {
@@ -256,7 +264,7 @@ describe('TypeScript type safety', () => {
       <ProviderComposer
         providers={[
           [ThemeProvider, { theme: 'test' }],
-          [UserProvider, { user: 'Test User' }]
+          [UserProvider, { user: 'Test User' }],
         ]}
       >
         <div data-testid="type-test-props">Type Test Props</div>
