@@ -16,7 +16,10 @@ interface AuthProviderProps {
   children: React.ReactNode;
 }
 
-const AuthProvider: React.FC<AuthProviderProps> = ({ initialUser, children }) => {
+const AuthProvider: React.FC<AuthProviderProps> = ({
+  initialUser,
+  children,
+}) => {
   return <div data-user={initialUser?.name}>{children}</div>;
 };
 
@@ -25,12 +28,17 @@ interface RouterProviderProps {
   children: React.ReactNode;
 }
 
-const RouterProvider: React.FC<RouterProviderProps> = ({ basename, children }) => {
+const RouterProvider: React.FC<RouterProviderProps> = ({
+  basename,
+  children,
+}) => {
   return <div data-basename={basename}>{children}</div>;
 };
 
 // Simple provider without props
-const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const NotificationProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   return <div data-notifications="enabled">{children}</div>;
 };
 

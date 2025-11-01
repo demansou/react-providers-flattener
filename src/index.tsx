@@ -3,6 +3,7 @@ import React from 'react';
 /**
  * A provider component with optional props
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Provider<P = any> = React.ComponentType<P>;
 
 /**
@@ -10,6 +11,7 @@ export type Provider<P = any> = React.ComponentType<P>;
  * - A React component (provider without props)
  * - A tuple of [Component, props] (provider with props)
  */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type ProviderEntry<P = any> =
   | Provider<P>
   | [Provider<P>, Omit<P, 'children'>];
@@ -62,21 +64,18 @@ export interface ProviderComposerProps {
  */
 export const ProviderComposer: React.FC<ProviderComposerProps> = ({
   providers,
-  children
+  children,
 }) => {
-  return providers.reduceRight<React.ReactElement>(
-    (acc, provider) => {
-      // Check if provider is a tuple [Component, props]
-      if (Array.isArray(provider)) {
-        const [Component, props] = provider;
-        return React.createElement(Component, props, acc);
-      }
+  return providers.reduceRight<React.ReactElement>((acc, provider) => {
+    // Check if provider is a tuple [Component, props]
+    if (Array.isArray(provider)) {
+      const [Component, props] = provider;
+      return React.createElement(Component, props, acc);
+    }
 
-      // Otherwise it's just a component without props
-      return React.createElement(provider, null, acc);
-    },
-    children as React.ReactElement
-  );
+    // Otherwise it's just a component without props
+    return React.createElement(provider, null, acc);
+  }, children as React.ReactElement);
 };
 
 /**
@@ -103,11 +102,12 @@ export const ProviderComposer: React.FC<ProviderComposerProps> = ({
 export const composeProviders = (
   providers: ProviderEntry[]
 ): React.FC<{ children: React.ReactNode }> => {
-  return ({ children }) => (
-    <ProviderComposer providers={providers}>
-      {children}
-    </ProviderComposer>
-  );
+  const ComposedProviders: React.FC<{ children: React.ReactNode }> = ({
+    children,
+  }) => <ProviderComposer providers={providers}>{children}</ProviderComposer>;
+
+  ComposedProviders.displayName = 'ComposedProviders';
+  return ComposedProviders;
 };
 
 // Default export
