@@ -1,4 +1,4 @@
-# react-providers-flattener
+# react-providers-flattener &middot; [![npm version](https://img.shields.io/badge/npm-v1.0.0-blue)](https://www.npmjs.com/package/react-providers-flattener)
 
 A simple way to flatten providers so you aren't building a sideways mountain.
 
